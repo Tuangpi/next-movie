@@ -1,4 +1,5 @@
 const token = process.env.TMDB_TOKEN;
+
 async function fetchCasts(id) {
     const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}/credits`, {
@@ -7,21 +8,27 @@ async function fetchCasts(id) {
         },
     }
     );
+
     return (await res.json()).cast;
 }
+
 export default async function Persons({ movie }) {
     const casts = await fetchCasts(movie.id);
-    const profile = "http://image.tmdb.org/t/p/w185";
+    const profile = "https://image.tmdb.org/t/p/w185";
+
     return (
         <div className="flex gap-4 flex-row flex-wrap">
-            {casts.map(cast => {
+            {casts?.map(cast => {
                 return (
                     <div
                         key={cast.id}
                         className="w-[180px] bg-gray-100 text-center
 flex flex-col justify-between">
                         {cast.profile_path ? (
-                            <img src={profile + cast.profile_path} />
+                            <img
+                                src={profile + cast.profile_path}
+                                alt={cast.name ?? "Cast member"}
+                            />
                         ) : (
                             <div></div>
                         )}

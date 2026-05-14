@@ -1,5 +1,7 @@
 import Movies from "@/components/Movies";
+
 const token = process.env.TMDB_TOKEN;
+
 async function fetchMovies(id) {
     const res = await fetch(
         `https://api.themoviedb.org/3/discover/movie?with_genres=${id}`, {
@@ -8,13 +10,17 @@ async function fetchMovies(id) {
         },
     }
     );
+
     return await res.json();
 }
+
 export default async function Home({ params }) {
-    const byGenres = await fetchMovies(params.id);
+    const { id, name } = await params;
+    const byGenres = await fetchMovies(id);
+
     return (
         <>
-            <h3 className="font-bold border-b mb-4 pb-2">{params.name}</h3>
+            <h3 className="font-bold border-b mb-4 pb-2">{name}</h3>
             <Movies movies={byGenres.results} />
         </>
     );
