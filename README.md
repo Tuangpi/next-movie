@@ -26,6 +26,11 @@ A simple movie browser built with Next.js 14, Tailwind CSS, and data from The Mo
 - `app/genres/[name]/[id]/page.js` - movies by genre
 - `components/` - shared UI and movie components
 
+## Live Site
+
+[View Live Site](https://next-movie.singkhantuang97.workers.dev/)
+
+
 ## Getting Started
 
 1. Install dependencies:
